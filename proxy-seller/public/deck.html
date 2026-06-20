@@ -57,7 +57,7 @@
       <img src="assets/logo.svg" alt="Bytomic Proxy" style="width:92px;height:92px;display:block;animation:floaty 5s ease-in-out infinite alternate">
       <span style="font-size:74px;font-weight:800;letter-spacing:-.03em;color:#f4f9ff">Bytomic <span style="color:#4d94ff">Proxy</span></span>
     </div>
-    <h1 style="position:relative;font-size:104px;line-height:1.0;font-weight:900;letter-spacing:-.04em;margin-top:18px;background:linear-gradient(180deg,#f4f9ff,#9fb6d0);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">Bandwidth agents can buy.</h1>
+    <h1 style="position:relative;font-size:104px;line-height:1.12;padding-bottom:.12em;font-weight:900;letter-spacing:-.04em;margin-top:18px;background:linear-gradient(180deg,#f4f9ff,#9fb6d0);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">Bandwidth agents can buy.</h1>
     <p style="position:relative;font-size:32px;line-height:1.5;color:#9fb0c2;max-width:32ch;margin-top:30px">Pay-per-request proxy egress for AI agents — USDC per call over x402, settled on-chain.</p>
     <div style="position:relative;display:inline-flex;align-items:stretch;border:1px solid #1c2530;border-radius:16px;background:linear-gradient(180deg,rgba(17,24,35,.72),rgba(11,15,20,.35));overflow:hidden;margin-top:50px">
       <div style="display:flex;align-items:center;gap:11px;padding:0 26px;border-right:1px solid #1c2530"><span style="width:9px;height:9px;border-radius:50%;background:#1677FF;box-shadow:0 0 12px rgba(22,119,255,.9);animation:pulseDot 2s infinite"></span><span style="font-family:ui-monospace,Menlo,monospace;font-size:15px;letter-spacing:.18em;text-transform:uppercase;color:#7e8da0">Built&nbsp;with</span></div>
@@ -236,7 +236,7 @@
     </div>
     <div style="position:absolute;inset:0;pointer-events:none;opacity:.5;background-image:radial-gradient(circle,rgba(125,150,180,.10) 1.5px,transparent 1.5px);background-size:42px 42px;mask-image:radial-gradient(ellipse 70% 60% at 50% 50%,#000,transparent 88%)"></div>
     <img src="assets/logo.svg" alt="Bytomic Proxy" style="position:relative;width:76px;height:76px;display:block;margin-bottom:30px;animation:floaty 5s ease-in-out infinite alternate">
-    <h2 style="position:relative;font-size:108px;font-weight:900;letter-spacing:-.04em;line-height:1.0;background:linear-gradient(180deg,#f4f9ff,#9fb6d0);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">Give your agent an exit.</h2>
+    <h2 style="position:relative;font-size:108px;font-weight:900;letter-spacing:-.04em;line-height:1.12;padding-bottom:.12em;background:linear-gradient(180deg,#f4f9ff,#9fb6d0);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">Give your agent an exit.</h2>
     <div style="position:relative;display:flex;align-items:center;gap:18px;margin-top:48px">
       <span style="display:inline-flex;align-items:center;gap:10px;padding:18px 32px;border-radius:14px;background:#1677FF;color:#fff;font-weight:700;font-size:24px;box-shadow:0 16px 50px -12px rgba(22,119,255,.6)">proxy.bytomic.tech →</span>
     </div>
@@ -296,7 +296,11 @@
       if ((el.tagName === 'H1' || el.tagName === 'H2') && el.__words) {
         el.__words.forEach(function (w) { out.push(w); });  // drop headline word-by-word
       } else if (/grid/.test(el.style.display)) {            // stagger cards, not the grid block
-        Array.prototype.forEach.call(el.children, function (c) { out.push(c); });
+        Array.prototype.forEach.call(el.children, function (c) {
+          var cp = c.style.position;
+          if (cp === 'absolute' || cp === 'fixed') return;   // skip connector line / decals
+          out.push(c);
+        });
       } else { out.push(el); }
     });
     return out;
