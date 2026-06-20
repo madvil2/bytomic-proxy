@@ -58,22 +58,17 @@ open https://<url>/        # dashboard
 
 The seller is proven; a real settled tx needs a funded buyer.
 
-**Route A — testnet, free, fully autonomous-able (recommended for "works on
-testnet"):** a buyer wallet on Base Sepolia, funded from a faucet, paying via the
-`@circle-fin/x402-batching` client + a Gateway deposit. Needs a small buyer build
-(see TODO below). Cost: $0. Gives clickable Base Sepolia tx hashes on the
-dashboard.
+**Route A — testnet, free, recommended for "works on testnet":** buyer wallet on
+Base Sepolia, funded by the CLI faucet drip + Gateway deposit, paid with the
+proven Circle CLI / `npm run buyer`. Cost: $0. Clickable Base Sepolia tx hashes on
+the dashboard. **Full step-by-step in [TESTNET.md](TESTNET.md)** — no extra code
+needed.
 
 **Route B — mainnet, ~$1, zero new code:** run the Circle Claude kit
 (`circle-kit/kits/claude-agent-sdk`) per `BUYER.md`, switch seller to
 `FACILITATOR_URL=https://gateway-api.circle.com` + `NETWORKS=eip155:8453`, fund
 ~$1 USDC, do one $0.001 paid fetch on camera. Real Base mainnet tx.
 
-For the video: dashboard + dev-bypass proves the proxy live; Route A or B
-provides the on-chain receipt. Do both — bypass for the smooth live loop, one
-real tx for the proof.
-
-## TODO if Route A: testnet client buyer
-A `scripts/buyer-testnet.ts` using `registerBatchScheme` (client) + `GatewayClient`
-deposit on Base Sepolia, looping the target list with the budget cap. ~80 lines;
-needs a faucet-funded key. Ask Claude to build it next.
+For the video: dashboard + dev-bypass proves the proxy live; Route A (testnet) or
+B (mainnet) provides the on-chain receipt. Do both — bypass for the smooth live
+loop, one real tx for the proof.

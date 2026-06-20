@@ -59,7 +59,17 @@ function payFetch(target: string): { tx: string; body: string } {
   // Mirror the Claude kit's pay invocation: GET, JSON output, generous timeout.
   const out = execFileSync(
     'circle',
-    ['services', 'pay', url, '--address', WALLET, '--chain', CHAIN, '--method', 'GET', '--timeout', '60', '--output', 'json'],
+    [
+      'services', 'pay', url,
+      '--address', WALLET,
+      '--chain', CHAIN,
+      '--method', 'GET',
+      // Hard on-chain budget guard: the CLI itself refuses to pay more than the
+      // per-call price, so a mispriced/hostile 402 can't drain the wallet.
+      '--max-amount', String(PRICE),
+      '--timeout', '60',
+      '--output', 'json',
+    ],
     { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] },
   );
   let body = out.trim();
